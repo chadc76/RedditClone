@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :logged_in?, except: [:destroy]
+
   def new
     @user = User.new
     render :new
@@ -7,8 +8,9 @@ class SessionsController < ApplicationController
 
   def create 
     @user = User.find_by_credentials(
-      params[:user][:username]
+      params[:user][:username],
       params[:user][:password]
+    )
 
     if @user.nil?
       flash.now[:errors] = ["username and Password did not match"]
