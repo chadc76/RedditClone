@@ -18,6 +18,12 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  def self.find_by_credentials(user, pw)
+    user = User.find_by(username: user)
+    return nil if user.nil?
+    user.is_password?(pw) ? user : nil 
+  end
+
   def self.generate_token
     SecureRandom.urlsafe_base64(16)
   end
