@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in?, only: [:new, :create]
 
-  has_many :subs, dependent: :destroy, inverse_of: :moderator
-
   def new 
     @user = User.new
     render :new
@@ -20,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    @user = User.includes(:subs).find_by(id: params[:id])
     render :show
   end
 
