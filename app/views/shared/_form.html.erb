@@ -1,0 +1,18 @@
+<% action_url = log_in ? session_url : users_url %>
+<% submit_text = log_in ? "Log in!" : "Sign up!" %>
+
+<%= render 'shared/flashes' %>
+
+<form action="<%= action_url %>" method="POST">
+  <%= auth_token %>
+  
+  <label>Username: 
+    <input type="text" name="user[username]" value="<%= user.username %>">
+  </label>
+
+  <label>Password: 
+    <input type="password" name="user[password]">
+  </label>
+
+  <input type="submit" value="<%= submit_text %>">
+</form>
