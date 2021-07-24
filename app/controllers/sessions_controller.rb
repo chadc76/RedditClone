@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
     )
 
     if @user.nil?
-      flash.now[:errors] = ["username and Password did not match"]
+      flash.now[:errors] = ["Username and Password did not match"]
+      @user = User.new
       render :new
     else
       log_in_user!(@user)      
