@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
       return
     end
   end
+
+  def is_logged_in? 
+    if !current_user
+      flash[:notice] = ["You must be logged in to do this"]
+      redirect_to new_session_url
+      return
+    end
+  end
 end
