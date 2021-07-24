@@ -50,7 +50,7 @@ class SubsController < ApplicationController
   private
 
   def set_sub 
-    @sub.find_by(id: params[:id])
+    @sub = Sub.find_by(id: params[:id])
   end
 
   def sub_params
