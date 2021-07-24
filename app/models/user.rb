@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_many :subs, dependent: :destroy, foreign_key: :moderator_id
+
   def self.find_by_credentials(user, pw)
     user = User.find_by(username: user)
     return nil if user.nil?
