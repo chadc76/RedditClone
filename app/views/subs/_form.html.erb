@@ -1,20 +1,20 @@
 <%= render 'shared/flashes' %>
 
-<form action="<%= @sub.action_url %>" method="POST">
+<form action="<%= sub.action_url %>" method="POST">
   <%= auth_token %>
 
-  <input type="hidden" name="_method" value="<%= @sub.hidden_method %>">
+  <input type="hidden" name="_method" value="<%= sub.hidden_method %>">
 
   <label>
     Name
-    <input type="text" name="sub[title]" value="<%= @sub.title %>">
+    <input type="text" name="sub[title]" value="<%= sub.title %>">
   </label>
 
   <br>
 
   <label>
     Description
-    <textarea name="sub[description]"><%= @sub.description %></textarea>
+    <textarea name="sub[description]"><%= sub.description %></textarea>
   </label>
 
   <input type="submit" value="Submit!">
