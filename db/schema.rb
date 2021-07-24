@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_24_032605) do
+ActiveRecord::Schema.define(version: 2021_07_24_230532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "post_subs", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "sub_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id", "sub_id"], name: "index_post_subs_on_post_id_and_sub_id", unique: true
+    t.index ["post_id"], name: "index_post_subs_on_post_id"
+    t.index ["sub_id"], name: "index_post_subs_on_sub_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
@@ -23,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_07_24_032605) do
     t.integer "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["title"], name: "index_posts_on_title", unique: true
   end
 
@@ -32,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_07_24_032605) do
     t.integer "moderator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["moderator_id"], name: "index_subs_on_moderator_id"
     t.index ["title"], name: "index_subs_on_title", unique: true
   end
 
