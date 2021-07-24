@@ -1,0 +1,42 @@
+<%= render 'shared/flashes' %>
+
+<form action="<%= post.action_url %>" method="POST">
+  <%= auth_token %>
+
+  <input type="hidden" name="_method" value="<%= post.hidden_method %>">
+
+  <label>
+    Title: 
+    <input type="text" name="post[title]" value="<%= post.title %>">
+  </label>
+
+  <br>
+
+  <label>
+    URL: 
+    <input type="text" name="post[url]" value="<%= post.url %>">
+  </label>
+
+  <br>
+
+  <label>
+    Content:
+    <textarea name="post[content]" ><%= post.content %></textarea>
+  </label>
+
+  <br>
+
+  <label>
+    Sub: 
+    <select name="post[sub_id]">
+      <option disabled> -- Please select a sub -- </option>
+      <% post.sub_options.each do |sub| %>
+        <option value="<%= sub.id %>"<%= post.sub_checked(sub.id) %>><%= sub.title %></option>
+      <% end %>
+    </select>
+  </label>
+
+  <br>
+
+  <input type="submit" value="Submit">
+</form>

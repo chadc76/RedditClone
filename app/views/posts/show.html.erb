@@ -1,0 +1,11 @@
+<h1><%= link_to @post.title, post_url(@post) %> by <%= @post.author.username %></h1>
+
+<b>Content:</b>
+<p><%= @post.content %></p>
+
+<b>Subs</b>
+<%= render 'shared/subs', subs: [@post.sub]  %>
+
+<% if current_user == @post.author %>
+  <%= link_to 'Edit', edit_post_url %>
+<% end %>

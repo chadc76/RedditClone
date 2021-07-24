@@ -3,6 +3,10 @@
 <b>Description</b>
 <p><%= @sub.description %></p>
 
+<%= link_to 'Make New Post!', new_post_url %>
+
+<%= render 'posts', posts: @sub.posts %>
+
 
 <% if current_user && current_user.id == @sub.moderator_id %>
   <%= link_to 'Edit', edit_sub_url %>
