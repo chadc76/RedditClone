@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resource :session, only: %i(new create destroy)
 
   resources :subs
+
+  resources :posts, except: [:index]
 end
