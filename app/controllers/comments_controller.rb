@@ -7,7 +7,8 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(
       content: params[:comment][:content],
-      post_id: params[:comment][:post_id]
+      post_id: params[:comment][:post_id],
+      parent_comment_id: params[:comment][:parent_comment_id]
     )
 
     @comment.author_id = current_user.id
@@ -18,5 +19,10 @@ class CommentsController < ApplicationController
       flash.now[:errors] = @comment.errors.full_messages
       render :new
     end
+  end
+
+  def show
+    @comment = Comment.find_by(id: params[:id])
+    render :show
   end
 end

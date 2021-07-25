@@ -1,5 +1,5 @@
 <ul>
-  <% comments.each do |comment| %>
-    <li><%= link_to "#{comment.content} by #{comment.author.username}", subs_url %></li>
+  <% comments.where(parent_comment_id: nil).each do |comment| %>
+    <li><%= render 'comment', comment: comment %></li>  
   <% end %>
 </ul>
