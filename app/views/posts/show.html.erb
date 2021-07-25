@@ -10,7 +10,7 @@
 
 <%= link_to 'Comment on this post', new_post_comment_url(params[:id]) %>
 <ul>
-  <% @all_comments.where(parent_comment_id: nil).each do |c1| %>
+  <% @comments_by_parent_id[nil].each do |c1| %>
     <li><%= render 'comment', c1: c1 %></li>
   <% end %>
 </ul>

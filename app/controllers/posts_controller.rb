@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :is_logged_in?, except: %i(show)
 
   def show
-    @all_comments = @post.comments
+    @comments_by_parent_id = @post.comments_by_parent_id
     render :show
   end
 

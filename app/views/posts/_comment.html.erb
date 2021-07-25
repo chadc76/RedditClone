@@ -1,8 +1,6 @@
 <%= link_to "#{c1.content} by #{c1.author.username}", comment_url(c1) %>
 <ul>
-  <% @all_comments.each do |c2| %>
-    <% if c2.parent_comment_id == c1.id %>
-      <li><%= render 'comment', c1: c2%></li>
-    <% end %>
+  <% @comments_by_parent_id[c1.id].each do |c2| %>
+    <li><%= render 'comment', c1: c2%></li>
   <% end %>
 </ul>

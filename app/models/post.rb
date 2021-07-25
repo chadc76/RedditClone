@@ -18,4 +18,13 @@ class Post < ApplicationRecord
   has_many :subs, through: :post_subs
   belongs_to :author, class_name: :User
   has_many :comments, dependent: :destroy
+
+  def comments_by_parent_id
+    comment_hash = Hash.new { |h,k| h[k] = [] }
+    self.comments.each do |c|
+      comment_hash[c.parent_comment_id] << c
+    end
+
+    comment_hash
+  end
 end
