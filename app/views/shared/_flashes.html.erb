@@ -1,13 +1,16 @@
-<ul>
-  <% if flash[:errors] %>
-    <% flash[:errors].each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-  <% end %>
+<% if flash[:errors] || flash[:notices] %>
 
-  <% if flash[:notice] %>
-    <% flash[:notice].each do |notice| %>
-      <li><%= notice %></li>
+  <ul>
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  
+    <% if flash[:notice] %>
+      <% flash[:notice].each do |notice| %>
+        <li><%= notice %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
