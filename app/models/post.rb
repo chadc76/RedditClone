@@ -17,4 +17,5 @@ class Post < ApplicationRecord
   has_many :post_subs, dependent: :destroy, inverse_of: :post
   has_many :subs, through: :post_subs
   belongs_to :author, class_name: :User
+  has_many :comments, dependent: :destroy
 end
