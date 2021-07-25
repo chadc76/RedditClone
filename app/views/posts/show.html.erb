@@ -9,7 +9,11 @@
 <h2>Comments</h2>
 
 <%= link_to 'Comment on this post', new_post_comment_url(params[:id]) %>
-<%= render 'comments', comments: @post.comments %>
+<ul>
+  <% @all_comments.where(parent_comment_id: nil).each do |c1| %>
+    <li><%= render 'comment', c1: c1 %></li>
+  <% end %>
+</ul>
 
 <% if current_user == @post.author %>
   <%= link_to 'Edit', edit_post_url %>
