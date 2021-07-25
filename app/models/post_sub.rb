@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 class PostSub < ApplicationRecord
-  validates :post_id, :sub_id, presence: true
+  validates :post, :sub_id, presence: true
   validates :post_id, uniqueness: { scope: :sub_id,
   message: "already linked to this sub"}
 

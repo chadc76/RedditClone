@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_posts, only: %i(show edit update destroy)
-  before_action :own_post, only: %i(edit create destroy)
+  before_action :own_post, only: %i(edit update destroy)
   before_action :is_logged_in?, except: %i(show)
 
   def show
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params).decorate
+    if @post.update(post_params)
       redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
@@ -40,17 +40,17 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:notice] = ["Post destroyed"]
-    redirect_to sub_url(@post.sub_id)
+    redirect_to subs_url
   end
 
   private
 
   def set_posts 
-    @post = Post.includes(:author).includes(:sub).find_by(id: params[:id]).decorate
+    @post = Post.includes(:author).includes(:subs).find_by(id: params[:id]).decorate
   end
 
   def post_params
-    params.require(:post).permit(:title, :url, :content, :sub_id)
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
 
   def own_post

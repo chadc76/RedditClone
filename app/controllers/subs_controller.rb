@@ -19,6 +19,7 @@ class SubsController < ApplicationController
 
   def create
     @sub = Sub.new(sub_params).decorate
+    @sub.moderator_id = current_user.id
 
     if @sub.save
       redirect_to sub_url(@sub)
@@ -34,7 +35,7 @@ class SubsController < ApplicationController
 
   def update
 
-    if @sub.update(sub_params).decorate
+    if @sub.update(sub_params)
       redirect_to sub_url(@sub)
     else
       flash.now[:errors] = @sub.errors.full_messages

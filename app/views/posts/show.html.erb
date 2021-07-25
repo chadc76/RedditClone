@@ -4,7 +4,7 @@
 <p><%= @post.content %></p>
 
 <b>Subs</b>
-<%= render 'shared/subs', subs: [@post.sub]  %>
+<%= render 'shared/subs', subs: @post.subs  %>
 
 <% if current_user == @post.author %>
   <%= link_to 'Edit', edit_post_url %>
