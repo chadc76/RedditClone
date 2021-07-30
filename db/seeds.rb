@@ -29,17 +29,19 @@ p 'Users created'
 
 users = User.all.map(&:id)
 
+description = Faker::Lorem.paragraph(sentence_count: 3)
+
 10.times do 
   user_id = (1..10).to_a.sample
-  Sub.create!(moderator_id: user_id, title: Faker::Lorem.unique.sentence(word_count: 4), description: Faker::Lorem.paragraph(sentence_count: 3))
+  Sub.create!(moderator_id: user_id, title: Faker::Superhero.unique.name, description: description)
 end
 
 p 'Subs Created'
 
 subs = Sub.all.map(&:id)
-
+content = Faker::Lorem.paragraph(sentence_count: 3)
 times = 1
-30.times do
+38.times do
   user_id = (1..10).to_a.sample
   sub_amount = (0...10).to_a
   sub_ids = subs.shuffle.take(sub_amount.sample)
@@ -48,12 +50,13 @@ times = 1
   post.save!
   
   users.each do |voter_id|
-    Comment.create!(author_id: voter_id, post_id: post.id, content: Faker::Lorem.paragraph(sentence_count: 3))
+    Comment.create!(author_id: voter_id, post_id: post.id, content: content)
   end
   p "Gone through #{times} times "
   times += 1
 end
-p 'Through the thick of it'
+
+
 
 users.each do |voter_id|
   Post.all.map(&:id).each do |post_id|

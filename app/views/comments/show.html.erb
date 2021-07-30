@@ -1,4 +1,4 @@
-<h1>(<%= score(@comment) %>) <%= @comment.content %> by <%= link_to @comment.author.username, user_url(@comment.author) %></h1>
+<h1>(<%= @comment.hotness %>) <%= @comment.content %> by <%= link_to @comment.author.username, user_url(@comment.author) %></h1>
 
 <%= render 'shared/flashes' %>
 
