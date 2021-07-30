@@ -73,7 +73,7 @@ class PostsController < ApplicationController
   private
 
   def set_posts 
-    @post = Post.includes(:author).includes(:subs).includes(comments: :votes).friendly.find(params[:id]).decorate
+    @post = Post.includes(:author).includes(:subs).includes(comments: [:votes, :author]).friendly.find(params[:id]).decorate
   end
 
   def post_params
