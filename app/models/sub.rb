@@ -8,6 +8,7 @@
 #  moderator_id :integer          not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  slug         :string
 #
 class Sub < ApplicationRecord
   validates :title, :description, :moderator_id, presence: true

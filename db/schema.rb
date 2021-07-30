@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_30_023837) do
+ActiveRecord::Schema.define(version: 2021_07_30_145138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,11 @@ ActiveRecord::Schema.define(version: 2021_07_30_023837) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_comment_id"
+    t.string "slug"
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["slug"], name: "index_comments_on_slug", unique: true
   end
 
   create_table "post_subs", force: :cascade do |t|
@@ -44,7 +46,9 @@ ActiveRecord::Schema.define(version: 2021_07_30_023837) do
     t.integer "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["title"], name: "index_posts_on_title", unique: true
   end
 
@@ -54,7 +58,9 @@ ActiveRecord::Schema.define(version: 2021_07_30_023837) do
     t.integer "moderator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["moderator_id"], name: "index_subs_on_moderator_id"
+    t.index ["slug"], name: "index_subs_on_slug", unique: true
     t.index ["title"], name: "index_subs_on_title", unique: true
   end
 
@@ -64,6 +70,8 @@ ActiveRecord::Schema.define(version: 2021_07_30_023837) do
     t.string "session_token", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
