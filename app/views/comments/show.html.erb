@@ -1,7 +1,7 @@
 <h1>(<%= score(@comment) %>) <%= @comment.content %> by <%= link_to @comment.author.username, user_url(@comment.author) %></h1>
 
 <% if current_user == @comment.author || current_user == @comment.post.author %>
-  <%= button_to 'Delete comment', comment_url(@comment) %>
+  <%= button_to 'Delete comment', comment_url(@comment), method: :delete %>
 <% end %>
 
 <%= button_to "Upvote", upvote_comment_url(@comment), params: {comment_id: @comment.id} %>     

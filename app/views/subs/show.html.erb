@@ -18,5 +18,5 @@
 
 <% if current_user && current_user.id == @sub.moderator_id %>
   <%= link_to 'Edit', edit_sub_url %>
-  <%= button_to 'Delete Sub', sub_url(@sub) %>
+  <%= button_to 'Delete Sub', sub_url(@sub), method: :delete %>
 <% end %>

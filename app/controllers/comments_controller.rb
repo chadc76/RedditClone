@@ -65,9 +65,9 @@ class CommentsController < ApplicationController
     end
 
     def own_comment
-      if current_user != @comment.author || current_user != @comment.post.author
+      if current_user != @comment.author && current_user != @comment.post.author
         flash[:notice] = ["Only the Author can edit a comment"]
-        redirect_to post_url(@comment)
+        redirect_to post_url(@comment.post)
       end
     end
 end

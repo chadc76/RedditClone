@@ -89,7 +89,7 @@ class SubsController < ApplicationController
   end
 
   def own_sub
-    if current_user && current_user.id != @sub.moderator_id
+    if current_user != @sub.moderator
       flash[:notice] = ["Only the Moderator can edit a sub"]
       redirect_to sub_url(@sub)
     end

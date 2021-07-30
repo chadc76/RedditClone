@@ -20,5 +20,5 @@
 
 <% if current_user == @post.author %>
   <%= link_to 'Edit', edit_post_url %>
-  <%= button_to 'Delete Post', post_url(@post) %>
+  <%= button_to 'Delete Post', post_url(@post), method: :delete %>
 <% end %>
