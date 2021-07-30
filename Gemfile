@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'faker'
 end
 
 group :development do
@@ -61,7 +62,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'guard-rspec'
 end
 
