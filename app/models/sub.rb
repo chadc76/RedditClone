@@ -11,6 +11,9 @@
 #  slug         :string
 #
 class Sub < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   validates :title, :description, :moderator_id, presence: true
   validates :title, uniqueness: true
 
