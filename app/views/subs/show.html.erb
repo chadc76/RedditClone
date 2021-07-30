@@ -1,5 +1,7 @@
 <h1><%= @sub.title %></h1>
+
 <%= render 'shared/flashes' %>
+
 <b>Description</b>
 <p><%= @sub.description %></p>
 <% unless current_user == @sub.moderator %>

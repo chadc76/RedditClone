@@ -1,5 +1,7 @@
 <h1>(<%= score(@post) %>) <%= link_to @post.title, post_url(@post) %> by <%= link_to @post.author.username, user_url(@post.author_id) %></h1>
 
+<%= render 'shared/flashes' %>
+
 <b>Content:</b>
 <p><%= @post.content %></p>
 

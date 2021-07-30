@@ -1,5 +1,7 @@
 <h1>(<%= score(@comment) %>) <%= @comment.content %> by <%= link_to @comment.author.username, user_url(@comment.author) %></h1>
 
+<%= render 'shared/flashes' %>
+
 <% if current_user == @comment.author || current_user == @comment.post.author %>
   <%= button_to 'Delete comment', comment_url(@comment), method: :delete %>
 <% end %>

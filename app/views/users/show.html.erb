@@ -1,5 +1,7 @@
 <h1><%= @user.username %></h1>
 
+<%= render 'shared/flashes' %>
+
 <h1>Subcribed Subs!</h1>
 <%= render 'shared/subs', subs: @user.subscriptions %>
 <h1><%= @user.username %>'s Subs!</h1>

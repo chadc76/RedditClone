@@ -1,3 +1,5 @@
+<%= render 'shared/flashes' %>
+
 <% if current_user %>
   <h1>Subcribed Subs!</h1>
   <%= render 'shared/subs', subs: @subs[:subscriptions] %>
