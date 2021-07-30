@@ -49,7 +49,8 @@ class PostsController < ApplicationController
   end
 
   def upvote
-    v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: 1)
+    post_id = Post.find_by(slug: params[:id]).id
+    v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: post_id, value: 1)
     v.save!
     if params[:sub_id]
       redirect_to sub_url(params[:sub_id])
@@ -59,7 +60,8 @@ class PostsController < ApplicationController
   end
 
   def downvote
-    v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: -1)
+    post_id = Post.find_by(slug: params[:id]).id
+    v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: post_id, value: -1)
     v.save!
     if params[:sub_id]
       redirect_to sub_url(params[:sub_id])
