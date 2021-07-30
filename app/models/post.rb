@@ -28,10 +28,4 @@ class Post < ApplicationRecord
 
     comment_hash
   end
-
-  def score
-    votes
-      .map(&:value)
-      .sum
-  end
 end
