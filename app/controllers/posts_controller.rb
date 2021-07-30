@@ -45,13 +45,15 @@ class PostsController < ApplicationController
   end
 
   def upvote
-    Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: 1)
-    redirect_back(fallback_location: root_path)
+    v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: 1)
+    v.save!
+    redirect_to sub_url(params[:sub_id])
   end
 
   def downvote
-    Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: -1)
-    redirect_back(fallback_location: root_path)
+    v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: -1)
+    v.save!
+    redirect_to sub_url(params[:sub_id])
   end
 
   private
