@@ -11,7 +11,16 @@
 class Subscription < ApplicationRecord
   validates :user_id, :sub_id, presence: true
   validates :user_id, uniqueness: { scope: :sub_id }
+  validate :not_users_sub
 
   belongs_to :user
   belongs_to :sub
+
+  private
+
+  def not_users_sub
+    if self.sub.moderator.id == user_id
+      errors.add(:user_id, "can't subscribe to own sub")
+    end
+  end
 end
