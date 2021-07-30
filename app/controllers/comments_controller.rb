@@ -27,12 +27,14 @@ class CommentsController < ApplicationController
   end
 
   def upvote
-    Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: 1)
-    redirect_back(fallback_location: root_path)
+    v = Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: 1)
+    v.save!
+    redirect_to post_url(params[:post_id])
   end
 
   def downvote
-    Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: -1)
-    redirect_back(fallback_location: root_path)
+    v = Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: -1)
+    v.save!
+    redirect_to post_url(params[:post_id])
   end
 end
