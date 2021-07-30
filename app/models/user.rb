@@ -58,6 +58,18 @@ class User < ApplicationRecord
     {my_subs: self.subs, subscriptions: self.subscriptions}
   end
 
+  def post_score
+    posts
+      .map(&:hotness)
+      .sum
+  end
+
+  def comment_score
+    comments
+      .map(&:hotness)
+      .sum
+  end
+
   private
 
   def ensure_session_token

@@ -1,4 +1,4 @@
-<h1>(<%= score(@post) %>) <%= link_to @post.title, post_url(@post) %> by <%= @post.author.username %></h1>
+<h1>(<%= score(@post) %>) <%= link_to @post.title, post_url(@post) %> by <%= link_to @post.author.username, user_url(@post.author_id) %></h1>
 
 <b>Content:</b>
 <p><%= @post.content %></p>

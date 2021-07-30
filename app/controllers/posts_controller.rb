@@ -54,8 +54,10 @@ class PostsController < ApplicationController
     v.save!
     if params[:sub_id]
       redirect_to sub_url(params[:sub_id])
-    else
+    elsif params[:post_id]
       redirect_to post_url(params[:post_id])
+    else
+      redirect_to user_url(params[:user_id])
     end
   end
 
@@ -65,8 +67,10 @@ class PostsController < ApplicationController
     v.save!
     if params[:sub_id]
       redirect_to sub_url(params[:sub_id])
-    else
+    elsif params[:post_id]
       redirect_to post_url(params[:post_id])
+    else
+      redirect_to user_url(params[:user_id])
     end
   end
 

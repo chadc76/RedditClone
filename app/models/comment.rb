@@ -28,4 +28,8 @@ class Comment < ApplicationRecord
     optional: true,
     foreign_key: :parent_comment_id,
     class_name: :Comment
+
+  def short_content
+    self.content[0..40] + "..."
+  end
 end

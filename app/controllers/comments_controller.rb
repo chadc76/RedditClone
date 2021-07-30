@@ -33,8 +33,10 @@ class CommentsController < ApplicationController
     v.save!
     if params[:post_id]
       redirect_to post_url(params[:post_id])
-    else
+    elsif params[:comment_id]
       redirect_to comment_url(params[:comment_id])
+    else
+      redirect_to user_url(params[:user_id])
     end
   end
 
@@ -43,8 +45,10 @@ class CommentsController < ApplicationController
     v.save!
     if params[:post_id]
       redirect_to post_url(params[:post_id])
-    else
+    elsif params[:comment_id]
       redirect_to comment_url(params[:comment_id])
+    else
+      redirect_to user_url(params[:user_id])
     end
   end
 end

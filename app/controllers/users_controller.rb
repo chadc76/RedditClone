@@ -18,7 +18,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:subs).friendly.find(params[:id])
+    @user = User.includes(:subs).includes(posts: :votes).includes(comments: :votes).includes(:subscriptions).friendly.find(params[:id])
+
+    @posts = @user.posts.sort_by{|p| p.hotness }.reverse
+
+    comments = @user.comments.sort_by{|c| c.hotness }.reverse
+    page = params[:page] || 1
+    @comments = Kaminari.paginate_array(comments).page(page).per(10)
+    
     render :show
   end
 

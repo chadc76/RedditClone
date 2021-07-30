@@ -1,5 +1,5 @@
 <div class="comments">
-  (<%= c1.hotness %>) <%= link_to "#{c1.content} by #{c1.author.username}", comment_url(c1) %>
+  (<%= c1.hotness %>) <%= link_to c1.content, comment_url(c1) %> by <%= link_to c1.author.username, user_url(c1.author_id) %>
   <%= button_to "Upvote", upvote_comment_url(c1), params: {post_id: @post.id} %>     
   <%= button_to "Downvote", downvote_comment_url(c1), params: {post_id: @post.id} %>
 </div>

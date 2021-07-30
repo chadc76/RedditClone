@@ -1,3 +1,36 @@
 <h1><%= @user.username %></h1>
 
+<h1>Subcribed Subs!</h1>
+<%= render 'shared/subs', subs: @user.subscriptions %>
+<h1><%= @user.username %>'s Subs!</h1>
 <%= render 'shared/subs', subs: @user.subs %>
+
+<h1><%= @user.username %>'s Posts!</h1>
+<p>Current Score: <%= @user.post_score %></p>
+<ul class="post-list">
+  <% @posts.each do |post| %>
+    <li>
+      <div class="posts">
+        (<%= post.hotness %>)  
+        <%= link_to post.title, post_url(post) %>
+        <%= button_to "Upvote", upvote_post_url(post), params: {user_id: @user.id} %>     
+        <%= button_to "Downvote", downvote_post_url(post), params: {user_id: @user.id} %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<h1><%= @user.username %>'s Comments!</h1>
+<p>Current Score: <%= @user.comment_score %></p>
+<ul>
+  <% @comments.each do |c1| %>
+    <li>
+      <div class="comments">
+      (<%= c1.hotness %>) <%= link_to c1.short_content, comment_url(c1) %> by <%= link_to c1.author.username, user_url(c1.author_id) %>
+      <%= button_to "Upvote", upvote_comment_url(c1), params: {user_id: @user.id} %>     
+      <%= button_to "Downvote", downvote_comment_url(c1), params: {user_id: @user.id} %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<%= paginate @comments %>
