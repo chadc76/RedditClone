@@ -5,7 +5,7 @@
 
 <%= link_to 'Make New Post!', new_post_url %>
 
-<%= render 'posts', posts: @sub.posts %>
+<%= render 'posts', posts: @sub.posts.sort_by{|p| score(p) }.reverse %>
 
 
 <% if current_user && current_user.id == @sub.moderator_id %>
