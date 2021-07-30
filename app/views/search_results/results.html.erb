@@ -1,0 +1,13 @@
+<h4 class='page-header'>Results</h4>
+
+<% if @results.empty? %>
+  <h4>No Results Found</h4>
+<% else %>
+  <h4>Subs</h4>
+  <% @results.each do |sub| %>
+    <ul>
+      <li><a href="<%= sub_url(sub) %>"><p><%= sub.title %></p></a></li>
+    </ul>
+    <% end %>
+  <% end %>
+
