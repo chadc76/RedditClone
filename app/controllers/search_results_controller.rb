@@ -1,4 +1,6 @@
 class SearchResultsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  
   def show
     @search = search_input
     @results = search_subs
