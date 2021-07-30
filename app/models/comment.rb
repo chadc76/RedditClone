@@ -30,6 +30,10 @@ class Comment < ApplicationRecord
     class_name: :Comment
 
   def short_content
-    self.content[0..40] + "..."
+    if self.content.length > 40    
+      self.content[0..40] + "..."
+    else
+      self.content
+    end
   end
 end
