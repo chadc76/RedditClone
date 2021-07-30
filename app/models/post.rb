@@ -18,6 +18,7 @@ class Post < ApplicationRecord
   has_many :subs, through: :post_subs
   belongs_to :author, class_name: :User
   has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy, as: :votable
 
   def comments_by_parent_id
     comment_hash = Hash.new { |h,k| h[k] = [] }
@@ -26,5 +27,11 @@ class Post < ApplicationRecord
     end
 
     comment_hash
+  end
+
+  def score
+    votes
+      .map(&:value)
+      .sum
   end
 end
