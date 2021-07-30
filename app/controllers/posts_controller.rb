@@ -5,6 +5,10 @@ class PostsController < ApplicationController
 
   def show
     @comments_by_parent_id = @post.comments_by_parent_id
+    @comments_by_parent_id.each do |k, comments|
+      new_comments = comments.sort_by { |comment| comment.score }.reverse
+      @comments_by_parent_id[k] = new_comments
+    end
     render :show
   end
 
