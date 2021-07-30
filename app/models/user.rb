@@ -26,6 +26,8 @@ class User < ApplicationRecord
   has_many :subs, dependent: :destroy, foreign_key: :moderator_id
   has_many :posts, dependent: :destroy, foreign_key: :author_id
   has_many :comments, dependent: :destroy, foreign_key: :author_id
+  has_many :subscription_sets, dependent: :destroy, class_name: :Subscription
+  has_many :subscriptions, through: :subscription_sets, source: :sub
 
   def self.find_by_credentials(user, pw)
     user = User.find_by(username: user)

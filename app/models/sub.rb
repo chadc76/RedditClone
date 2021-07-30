@@ -20,4 +20,6 @@ class Sub < ApplicationRecord
   belongs_to :moderator, class_name: :User
   has_many :post_subs, dependent: :destroy, inverse_of: :sub
   has_many :posts, through: :post_subs
+  has_many :subscription_sets, dependent: :destroy, class_name: :Subscription
+  has_many :subscribers, through: :subscription_sets, source: :user
 end
