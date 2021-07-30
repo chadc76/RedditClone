@@ -52,7 +52,7 @@ class SubsController < ApplicationController
   private
 
   def set_sub 
-    @sub = Sub.includes(posts: :votes).find_by(id: params[:id]).decorate
+    @sub = Sub.includes(posts: :votes).friendly.find(params[:id]).decorate
   end
 
   def sub_params
