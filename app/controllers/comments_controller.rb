@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :is_logged_in?, except: %i(show)
+  
   def new
     @comment = Comment.new
     render :new
@@ -29,12 +31,20 @@ class CommentsController < ApplicationController
   def upvote
     v = Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: 1)
     v.save!
-    redirect_to post_url(params[:post_id])
+    if params[:post_id]
+      redirect_to post_url(params[:post_id])
+    else
+      redirect_to comment_url(params[:comment_id])
+    end
   end
 
   def downvote
     v = Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: -1)
     v.save!
-    redirect_to post_url(params[:post_id])
+    if params[:post_id]
+      redirect_to post_url(params[:post_id])
+    else
+      redirect_to comment_url(params[:comment_id])
+    end
   end
 end

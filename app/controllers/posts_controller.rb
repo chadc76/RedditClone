@@ -47,13 +47,21 @@ class PostsController < ApplicationController
   def upvote
     v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: 1)
     v.save!
-    redirect_to sub_url(params[:sub_id])
+    if params[:sub_id]
+      redirect_to sub_url(params[:sub_id])
+    else
+      redirect_to post_url(params[:post_id])
+    end
   end
 
   def downvote
     v = Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: -1)
     v.save!
-    redirect_to sub_url(params[:sub_id])
+    if params[:sub_id]
+      redirect_to sub_url(params[:sub_id])
+    else
+      redirect_to post_url(params[:post_id])
+    end
   end
 
   private
