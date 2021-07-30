@@ -8,8 +8,5 @@ class AddSlugs < ActiveRecord::Migration[6.1]
 
     add_column :posts, :slug, :string
     add_index :posts, :slug, unique: true
-
-    add_column :comments, :slug, :string
-    add_index :comments, :slug, unique: true
   end
 end

@@ -22,11 +22,9 @@ ActiveRecord::Schema.define(version: 2021_07_30_145341) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_comment_id"
-    t.string "slug"
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["slug"], name: "index_comments_on_slug", unique: true
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
