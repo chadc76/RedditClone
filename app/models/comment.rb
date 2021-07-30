@@ -27,11 +27,5 @@ class Comment < ApplicationRecord
     foreign_key: :parent_comment_id,
     class_name: :Comment
 
-    has_many :votes, dependent: :destroy, as: :votable
-
-    def score
-      votes
-        .map(&:value)
-        .sum
-    end
+  has_many :votes, dependent: :destroy, as: :votable
 end
