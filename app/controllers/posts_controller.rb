@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_posts, only: %i(show edit update destroy)
+  before_action :set_posts, only: %i(show edit update destroy remove_sub)
   before_action :own_post, only: %i(edit update destroy)
   before_action :is_logged_in?, except: %i(show)
+  before_action :is_moderator?, only: [:remove_sub]
 
   def show
     @comments_by_parent_id = @post.comments_by_parent_id
@@ -74,6 +75,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def remove_sub
+    PostSub.find_by(post_id: @post.id, sub_id: params[:sub_id]).destroy
+    flash[:notice] = ["Post added to sub"]
+    redirect_to sub_url(params[:sub_id])
+  end
+
   private
 
   def set_posts 
@@ -85,8 +92,15 @@ class PostsController < ApplicationController
   end
 
   def own_post
-    if current_user && current_user.id != @post.author_id
+    if current_user != @post.author
       flash[:notice] = ["Only the Author can edit a post"]
+      redirect_to post_url(@post)
+    end
+  end
+
+  def is_moderator? 
+    if current_user != Sub.find(params[:sub_id]).moderator
+      flash[:notice] = ["you Are not the Moderator"]
       redirect_to post_url(@post)
     end
   end

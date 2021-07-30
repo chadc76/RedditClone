@@ -6,6 +6,9 @@
         <%= link_to post.title, post_url(post) %>
         <%= button_to "Upvote", upvote_post_url(post), params: {sub_id: @sub.id} %>     
         <%= button_to "Downvote", downvote_post_url(post), params: {sub_id: @sub.id} %>
+        <% if @sub.moderator == current_user %>
+          <%= button_to "Remove From Sub", remove_sub_post_url(post), params: {sub_id: @sub.id} %>
+        <% end %>
       </div>
     </li>
   <% end %>
