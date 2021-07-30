@@ -26,4 +26,6 @@ Rails.application.routes.draw do
       post 'downvote'
     end
   end
+
+  resource :search_results, only: %i(show)
 end

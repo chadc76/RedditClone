@@ -34,3 +34,7 @@
 .comments {
   padding-bottom: 5px;
 }
+
+ul {
+  width: fit-content;
+}

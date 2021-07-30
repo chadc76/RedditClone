@@ -22,6 +22,26 @@
       <%= link_to 'Sign in!', new_session_url %>
     <% end %>
 
+    <div class="search-bar-container">
+      <form action="<%= search_results_url %>" method="get">
+        <%= auth_token %>
+        <% if @search %>
+          <input
+          type="search" 
+          name="search[search_input]" 
+          value="<%= @search %>"
+          required>
+        <% else %>
+          <input
+            type="search" 
+            name="search[search_input]" 
+            placeholder="Search.."
+            required>
+        <% end %>
+          <input type="submit" value="Search">
+      </form>
+    </div>
+
     <%= yield %>
 
   </body>
