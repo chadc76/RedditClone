@@ -1,3 +1,5 @@
-<h1><%= @comment.content %> by <%= @comment.author.username %></h1>
+<h1>(<%= score(@comment) %>) <%= @comment.content %> by <%= @comment.author.username %></h1>
+<%= button_to "Upvote", upvote_comment_url(@comment), params: {comment_id: @comment.id} %>     
+<%= button_to "Downvote", downvote_comment_url(@comment), params: {comment_id: @comment.id} %>
 <b>Reply to this comment:</b>
 <%= render 'form', comment: Comment.new %>

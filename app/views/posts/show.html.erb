@@ -1,7 +1,10 @@
-<h1><%= link_to @post.title, post_url(@post) %> by <%= @post.author.username %></h1>
+<h1>(<%= score(@post) %>) <%= link_to @post.title, post_url(@post) %> by <%= @post.author.username %></h1>
 
 <b>Content:</b>
 <p><%= @post.content %></p>
+
+<%= button_to "Upvote", upvote_post_url(@post), params: {post_id: @post.id} %>     
+<%= button_to "Downvote", downvote_post_url(@post), params: {post_id: @post.id} %>
 
 <b>Subs</b>
 <%= render 'shared/subs', subs: @post.subs  %>
