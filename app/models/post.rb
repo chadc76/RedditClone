@@ -12,10 +12,11 @@
 #  slug       :string
 #
 class Post < ApplicationRecord
+  include Votable
+
   extend FriendlyId
   friendly_id :title, use: :slugged
-  paginates_per 5
-  PAGINATION_OPTIONS = [5, 10, 15, 20]
+    
   validates :title, :author_id, presence: true
   validates :title, uniqueness: true
   
@@ -32,11 +33,5 @@ class Post < ApplicationRecord
     end
 
     comment_hash
-  end
-
-  def score
-    votes
-      .map(&:value)
-      .sum
   end
 end
