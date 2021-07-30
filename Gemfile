@@ -37,6 +37,7 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'faker'
+  gem 'font-awesome-rails'
 end
 
 group :development do
