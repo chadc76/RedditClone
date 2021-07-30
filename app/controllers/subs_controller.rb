@@ -9,6 +9,9 @@ class SubsController < ApplicationController
   end
 
   def show
+    posts = @sub.posts.sort_by{|p| p.score }.reverse
+    page = params[:page] || 1
+    @posts = Kaminari.paginate_array(posts).page(page).per(10)
     render :show
   end
 
