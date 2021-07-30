@@ -44,6 +44,16 @@ class PostsController < ApplicationController
     redirect_to subs_url
   end
 
+  def upvote
+    Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: 1)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote
+    Vote.new(user_id: current_user.id, votable_type: "Post", votable_id: params[:id], value: -1)
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def set_posts 

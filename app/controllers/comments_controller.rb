@@ -25,4 +25,14 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(id: params[:id])
     render :show
   end
+
+  def upvote
+    Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: 1)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote
+    Vote.new(user_id: current_user.id, votable_type: "Comment", votable_id: params[:id], value: -1)
+    redirect_back(fallback_location: root_path)
+  end
 end
