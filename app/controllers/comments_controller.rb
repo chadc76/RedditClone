@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   before_action :is_logged_in?, except: %i(show)
+  before_action :set_comment, only: %i(show destroy)
+  before_action :own_comment, only: [:destroy]
 
   def new
     @comment = Comment.new
@@ -24,8 +26,13 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @comment = Comment.find_by(id: params[:id])
     render :show
+  end
+
+  def destroy
+    @comment.destroy
+    flash[:notice] = ["comment has been deleted"]
+    redirect_to post_url(@comment.post_id)
   end
 
   def upvote
@@ -51,4 +58,16 @@ class CommentsController < ApplicationController
       redirect_to user_url(params[:user_id])
     end
   end
+
+  private
+    def set_comment
+      @comment = Comment.includes(:post).find_by(id: params[:id])
+    end
+
+    def own_comment
+      if current_user != @comment.author || current_user != @comment.post.author
+        flash[:notice] = ["Only the Author can edit a comment"]
+        redirect_to post_url(@comment)
+      end
+    end
 end

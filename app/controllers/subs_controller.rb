@@ -1,6 +1,6 @@
 class SubsController < ApplicationController
   before_action :set_sub, only: %i(show edit update destroy)
-  before_action :own_sub, only: [:edit, :update]
+  before_action :own_sub, only: [:edit, :update, :destroy]
   before_action :is_logged_in?, except: %i(index show)
 
   def index 
@@ -54,7 +54,7 @@ class SubsController < ApplicationController
   def destroy
     @sub.destroy
     flash[:notice] = ["#{@sub.title} has been deleted"]
-    redirect_to :subs
+    redirect_to subs_url
   end
 
   def subscribe

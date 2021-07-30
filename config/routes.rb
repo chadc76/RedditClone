@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts, except: [:index] do
-    resources :comments, only: [:new]
+    resources :comments, only: [:new, :destroy]
     member do
       post 'upvote'
       post 'downvote'
