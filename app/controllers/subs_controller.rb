@@ -57,6 +57,27 @@ class SubsController < ApplicationController
     redirect_to :subs
   end
 
+  def subscribe
+    sub_id = Sub.find_by(slug: params[:id]).id
+    s = Subscription.new(user_id: current_user.id, sub_id: sub_id)
+    if s.save
+      flash[:notice] = ["Subscribed!"]
+      redirect_to sub_url(params[:id])
+    else
+      flash[:errors] = s.errors.full_messages
+      redirect_to sub_url(params[:id])
+    end
+  end
+
+  def unsubscribe
+    sub_id = Sub.find_by(slug: params[:id]).id
+    s = Subscription.find_by(user_id: current_user.id, sub_id: sub_id)
+    s.destroy!
+    
+    flash[:notice] = ["UnSubscribed!"]
+    redirect_to sub_url(params[:id])
+  end
+
   private
 
   def set_sub 

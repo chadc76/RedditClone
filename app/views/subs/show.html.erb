@@ -2,6 +2,13 @@
 <%= render 'shared/flashes' %>
 <b>Description</b>
 <p><%= @sub.description %></p>
+<% unless current_user == @sub.moderator %>
+  <% if current_user.subscriptions.include?(@sub) %>
+    <%= button_to 'Unsubscribe!', unsubscribe_sub_url(@sub) %>
+  <% else %>
+    <%= button_to 'Subscribe!', subscribe_sub_url(@sub) %>
+  <% end %>
+<% end %>
 
 <%= link_to 'Make New Post!', new_post_url %>
 

@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   resource :session, only: %i(new create destroy)
 
-  resources :subs
+  resources :subs do 
+    member do
+      post 'subscribe'
+      post 'unsubscribe'
+    end
+  end
 
   resources :posts, except: [:index] do
     resources :comments, only: [:new]
