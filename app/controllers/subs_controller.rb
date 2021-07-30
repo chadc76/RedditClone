@@ -4,7 +4,12 @@ class SubsController < ApplicationController
   before_action :is_logged_in?, except: %i(index show)
 
   def index 
-    @subs = Sub.all
+    if !current_user
+      @subs = {all_subs: Sub.all}
+    else
+      @subs = current_user.all_subs
+    end
+
     render :index
   end
 

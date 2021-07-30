@@ -54,6 +54,10 @@ class User < ApplicationRecord
     self.session_token
   end
 
+  def all_subs
+    {my_subs: self.subs, subscriptions: self.subscriptions}
+  end
+
   private
 
   def ensure_session_token
