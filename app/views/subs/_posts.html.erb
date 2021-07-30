@@ -2,8 +2,8 @@
   <% posts.each do |post| %>
     <li>
       <div class="posts">
-        (<%= score(post) %>)  
-        <%= link_to post.title, post_url(post) %>     
+        (<%= post.hotness %>)  
+        <%= link_to post.title, post_url(post) %>
         <%= button_to "Upvote", upvote_post_url(post), params: {sub_id: @sub.id} %>     
         <%= button_to "Downvote", downvote_post_url(post), params: {sub_id: @sub.id} %>
       </div>
